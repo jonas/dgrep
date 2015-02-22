@@ -1,0 +1,74 @@
+Scala (programmeringssprog)
+
+Fra Wikipedia, den frie encyklopædi
+Scala er et fler-paradigmatisk programmeringssprog, der både integrerer egenskaber fra objektorienteret og funktionel programmering. Navnet stammer for det første fra det italienske ord scala, der oversættes til trappe, og henviser til, at man med sproget træder op på et nyt niveau af programmering[1]. For det andet henviser det til ordet skala, der hentyder til, at sproget kan bruges til projekter i ethvert tænkeligt målestoksforhold.
+
+Indholdsfortegnelse
+
+1 Platform
+2 Historie
+3 Hello World eksempel
+4 Projekter der bruger Scala
+5 Se også
+6 Eksterne henvisninger
+7 Kilder
+8 Noter
+Platform
+
+Scala er dybt inspireret af Java og er fuldt ud kompatibelt med Javas Virtual Machine (JVM). Ud over Javas objektorienterede struktur benytter scala sig af funktionelle begreber såsom currying[note 1], pattern-matching[note 2] og anonyme funktioner[note 3]. Scala er som Java statisk typet. Sproget er udgivet under BSD.
+
+Historie
+
+Scala er udviklet og udtænkt af Martin Odersky, der er ansat på École Polytechnique Fédérale de Lausanne (EPFL) i Schweiz. Udviklingen begyndte i 2001, og udgivet i slutningen af 2003 / starten af 2004[2]. Scala er løbende blevet udviklet, og er i januar 2013 nået til version 2.10.0.
+
+Hello World eksempel
+
+
+
+ object HelloWorld extends App {
+   println("Hello World!")
+ }
+
+Eksemplet kan kompileres ved hjælp af scalas compiler fra konsol. Hvis ovenstående gemmes i filen "HelloWorld.scala" kan filen kompileres således:
+
+> scalac HelloWorld.scala
+Og eksekveres således:
+
+> scala -classpath . HelloWorld
+Med programmeringssproget følger også et read-eval-print loop miljø, som kan afvikles i en konsol. I det kan man skrive og evaluere kode, som eksempelvis:
+
+
+
+ > println("Hello World!")
+
+Projekter der bruger Scala
+
+LinkedIn
+Twitter
+The Guardian
+Play er et framework der types anvendes til at skrive hjemmesider efter REST-principperne.
+Lift er en omfattende programmeringsstruktur (framework), der er beregnet til at skabe dynamiske internet-applikationer. Lift selv fremhæver sikkerhed, vedligeholdelse og ydeevne, som nogle af deres primære fokuspunkter[3].
+Se også
+
+Java
+C#
+Funktionsprogrammering
+Objektorienteret programmering
+Eksterne henvisninger
+
+Scalas hjemmeside
+EPFL's hjemmeside
+Kilder
+
+Hoppe op ↑ Frequently Asked Questions – General | The Scala Programming Language
+Hoppe op ↑ Martin Odersky et al., An Overview of the Scala Programming Language
+Hoppe op ↑ Lift – The Simply Functional Web Framework – Home
+Noter
+
+Hoppe op ↑ Udtrykket stammer fra den russiske logiker og matematiker Moses Schönfinkel, der påpegede, at en funktion med t eller flere argumenter, kunne erstattes med en funktion, der kun modtog et enkelt argument. Denne ide blev senere udviklet af logikeren og matematikeren Haskell Curry fra USA, deraf navnet.
+Hoppe op ↑ Pattern-matching – kan direkte oversættes til "mønster-søgning" – vedrører det at søge efter specifikke mønstre i en given kode. Denne form for handling forbindes ofte med funktionel programmering, da den ofte ses mere udviklet i disse sprog end andre. Ideen kan dog principielt tilføres alle former for programmeringsparadigmer.
+Hoppe op ↑ Anonyme funktioner vedrører evnen til at erklære funktioner, der ikke er givet et unikt navn. Denne egenskab bliver primært brugt i forbindelse med funktionalitet, der kun har et lille anvendelsesområde, og derfor ikke har brug for at blive navngivet.
+Hentet fra "http://da.wikipedia.org/w/index.php?title=Scala_(programmeringssprog)&oldid=6978942"
+Kategori: Programmeringssprog
+Denne side blev senest ændret den 17. marts 2013 kl. 07:36.
+Tekst er tilgængelig under Creative Commons Navngivelse/Del på samme vilkår 3.0; yderligere betingelser kan være gældende. Se brugsbetingelserne for flere oplysninger.

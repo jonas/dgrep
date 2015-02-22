@@ -1,0 +1,371 @@
+Functional programming
+From Wikipedia, the free encyclopedia
+In computer science, functional programming is a programming paradigm, a style of building the structure and elements of computer programs, that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. It is a declarative programming paradigm, which means programming is done with expressions. In functional code, the output value of a function depends only on the arguments that are input to the function, so calling a function f twice with the same value for an argument x will produce the same result f(x) each time. Eliminating side effects, i.e. changes in state that do not depend on the function inputs, can make it much easier to understand and predict the behavior of a program, which is one of the key motivations for the development of functional programming.
+
+Functional programming has its roots in lambda calculus, a formal system developed in the 1930s to investigate computability, the Entscheidungsproblem, function definition, function application, and recursion. Many functional programming languages can be viewed as elaborations on the lambda calculus. In the other well-known declarative programming paradigm, logic programming, relations are at the base of respective languages.[1]
+
+In contrast, imperative programming changes state with commands in the source language, the most simple example being assignment. Imperative programming does have functions, not in the mathematical sense, but in the sense of subroutines. They can have side effects that may change the value of program state. Functions without return values therefore make sense. Because of this, they lack referential transparency, i.e. the same language expression can result in different values at different times depending on the state of the executing program.[1]
+
+Functional programming languages, especially purely functional ones such as Hope and Rex, have largely been emphasized in academia rather than in commercial software development. However, prominent functional programming languages such as Common Lisp, Scheme,[2][3][4][5] Clojure, Racket,[6] Erlang,[7][8][9] OCaml,[10][11] Haskell,[12][13] and F#[14][15] have been used in industrial and commercial applications by a wide variety of organizations. Functional programming is also supported in some domain-specific programming languages like R (statistics),[16][17] Wolfram Language (also known as M or Mathematica, for symbolic and numeric math),[18] J, K and Q from Kx Systems (financial analysis), XQuery/XSLT (XML),[19][20] and Opal.[21] Widespread domain-specific declarative languages like SQL and Lex/Yacc use some elements of functional programming, especially in eschewing mutable values.[22]
+
+Programming in a functional style can also be accomplished in languages that aren’t specifically designed for functional programming. For example, the imperative Perl programming language has been the subject of a book describing how to apply functional programming concepts.[23] This is also true of the PHP programming language.[24] C# 3.0 and Java 8 added constructs to facilitate the functional style. An interesting case is that of Scala[25] – it is frequently written in a functional style, but the presence of side effects and mutable state place it in a grey area between imperative and functional languages.
+
+Contents
+
+1 History
+2 Concepts
+2.1 First-class and higher-order functions
+2.2 Pure functions
+2.3 Recursion
+2.4 Strict versus non-strict evaluation
+2.5 Type systems
+2.6 Functional programming in non-functional languages
+3 Comparison to imperative programming
+3.1 Simulating state
+3.2 Efficiency issues
+3.3 Coding styles
+3.3.1 Haskell
+3.3.2 Erlang
+3.3.3 Lisp
+3.3.4 D
+4 Use in industry
+5 See also
+6 References
+7 Further reading
+8 External links
+History
+
+Lambda calculus provides a theoretical framework for describing functions and their evaluation. Although it is a mathematical abstraction rather than a programming language, it forms the basis of almost all functional programming languages today. An equivalent theoretical formulation, combinatory logic, is commonly perceived as more abstract than lambda calculus and preceded it in invention. Combinatory logic and lambda calculus were both originally developed to achieve a clearer approach to the foundations of mathematics.[26]
+
+An early functional-flavored language was Lisp, developed by John McCarthy while at Massachusetts Institute of Technology (MIT) for the IBM 700/7000 series scientific computers in the late 1950s.[27] Lisp introduced many features now found in functional languages, though Lisp is technically a multi-paradigm language. Scheme and Dylan were later attempts to simplify and improve Lisp.
+
+Information Processing Language (IPL) is sometimes cited as the first computer-based functional programming language.[28] It is an assembly-style language for manipulating lists of symbols. It does have a notion of "generator", which amounts to a function accepting a function as an argument, and, since it is an assembly-level language, code can be used as data, so IPL can be regarded as having higher-order functions. However, it relies heavily on mutating list structure and similar imperative features.
+
+Kenneth E. Iverson developed APL in the early 1960s, described in his 1962 book A Programming Language (ISBN 9780471430148). APL was the primary influence on John Backus's FP. In the early 1990s, Iverson and Roger Hui created J. In the mid-1990s, Arthur Whitney, who had previously worked with Iverson, created K, which is used commercially in financial industries along with its descendant Q.
+
+John Backus presented FP in his 1977 Turing Award lecture "Can Programming Be Liberated From the von Neumann Style? A Functional Style and its Algebra of Programs".[29] He defines functional programs as being built up in a hierarchical way by means of "combining forms" that allow an "algebra of programs"; in modern language, this means that functional programs follow the principle of compositionality. Backus's paper popularized research into functional programming, though it emphasized function-level programming rather than the lambda-calculus style which has come to be associated with functional programming.
+
+In the 1970s, ML was created by Robin Milner at the University of Edinburgh, and David Turner initially developed the language SASL at the University of St. Andrews and later the language Miranda at the University of Kent. Also in Edinburgh in the 1970s, Burstall and Darlington developed the functional language NPL.[30] NPL was based on Kleene Recursion Equations and was first introduced in their work on program transformation.[31] Burstall, MacQueen and Sannella then incorporated the polymorphic type checking from ML to produce the language Hope.[32] ML eventually developed into several dialects, the most common of which are now OCaml and Standard ML Meanwhile, the development of Scheme (a partly functional dialect of Lisp), as described in the influential Lambda Papers and the 1985 textbook Structure and Interpretation of Computer Programs, brought awareness of the power of functional programming to the wider programming-languages community.
+
+In the 1980s, Per Martin-Löf developed intuitionistic type theory (also called constructive type theory), which associated functional programs with constructive proofs of arbitrarily complex mathematical propositions expressed as dependent types. This led to powerful new approaches to interactive theorem proving and has influenced the development of many subsequent functional programming languages.
+
+The Haskell language began with a consensus in 1987 to form an open standard for functional programming research; implementation releases have been ongoing since 1990.
+
+Concepts
+
+A number of concepts and paradigms are specific to functional programming, and generally foreign to imperative programming (including object-oriented programming). However, programming languages are often hybrids of several programming paradigms, so programmers using "mostly imperative" languages may have utilized some of these concepts.[33]
+
+First-class and higher-order functions
+
+Higher-order functions are functions that can either take other functions as arguments or return them as results. In calculus, an example of a higher-order function is the differential operator d/dx, which returns the derivative of a function f.
+
+Higher-order functions are closely related to first-class functions in that higher-order functions and first-class functions both allow functions as arguments and results of other functions. The distinction between the two is subtle: "higher-order" describes a mathematical concept of functions that operate on other functions, while "first-class" is a computer science term that describes programming language entities that have no restriction on their use (thus first-class functions can appear anywhere in the program that other first-class entities like numbers can, including as arguments to other functions and as their return values).
+
+Higher-order functions enable partial application or currying, a technique in which a function is applied to its arguments one at a time, with each application returning a new function that accepts the next argument. This allows one to succinctly express, for example, the successor function as the addition operator partially applied to the natural number one.
+
+Pure functions
+
+Purely functional functions (or expressions) have no side effects (memory or I/O). This means that pure functions have several useful properties, many of which can be used to optimize the code:
+
+If the result of a pure expression is not used, it can be removed without affecting other expressions.
+If a pure function is called with arguments that cause no side-effects, the result is constant with respect to that argument list (sometimes called referential transparency), i.e. if the pure function is again called with the same arguments, the same result will be returned (this can enable caching optimizations such as memoization).
+If there is no data dependency between two pure expressions, then their order can be reversed, or they can be performed in parallel and they cannot interfere with one another (in other terms, the evaluation of any pure expression is thread-safe).
+If the entire language does not allow side-effects, then any evaluation strategy can be used; this gives the compiler freedom to reorder or combine the evaluation of expressions in a program (for example, using deforestation).
+While most compilers for imperative programming languages detect pure functions and perform common-subexpression elimination for pure function calls, they cannot always do this for pre-compiled libraries, which generally do not expose this information, thus preventing optimizations that involve those external functions. Some compilers, such as gcc, add extra keywords for a programmer to explicitly mark external functions as pure, to enable such optimizations. Fortran 95 also allows functions to be designated "pure".
+
+Recursion
+
+Iteration (looping) in functional languages is usually accomplished via recursion. Recursive functions invoke themselves, allowing an operation to be performed over and over until the base case is reached. Though some recursion requires maintaining a stack, tail recursion can be recognized and optimized by a compiler into the same code used to implement iteration in imperative languages. The Scheme language standard requires implementations to recognize and optimize tail recursion. Tail recursion optimization can be implemented by transforming the program into continuation passing style during compiling, among other approaches.
+
+Common patterns of recursion can be factored out using higher order functions, with catamorphisms and anamorphisms (or "folds" and "unfolds") being the most obvious examples. Such higher order functions play a role analogous to built-in control structures such as loops in imperative languages.
+
+Most general purpose functional programming languages allow unrestricted recursion and are Turing complete, which makes the halting problem undecidable, can cause unsoundness of equational reasoning, and generally requires the introduction of inconsistency into the logic expressed by the language's type system. Some special purpose languages such as Coq allow only well-founded recursion and are strongly normalizing (nonterminating computations can be expressed only with infinite streams of values called codata). As a consequence, these languages fail to be Turing complete and expressing certain functions in them is impossible, but they can still express a wide class of interesting computations while avoiding the problems introduced by unrestricted recursion. Functional programming limited to well-founded recursion with a few other constraints is called total functional programming.[34]
+
+Strict versus non-strict evaluation
+
+Functional languages can be categorized by whether they use strict (eager) or non-strict (lazy) evaluation, concepts that refer to how function arguments are processed when an expression is being evaluated. The technical difference is in the denotational semantics of expressions containing failing or divergent computations. Under strict evaluation, the evaluation of any term containing a failing subterm will itself fail. For example, the expression:
+
+print length([2+1, 3*2, 1/0, 5-4])
+will fail under strict evaluation because of the division by zero in the third element of the list. Under lazy evaluation, the length function will return the value 4 (i.e., the number of items in the list), since evaluating it will not attempt to evaluate the terms making up the list. In brief, strict evaluation always fully evaluates function arguments before invoking the function. Lazy evaluation does not evaluate function arguments unless their values are required to evaluate the function call itself.
+
+The usual implementation strategy for lazy evaluation in functional languages is graph reduction.[35] Lazy evaluation is used by default in several pure functional languages, including Miranda, Clean, and Haskell.
+
+Hughes 1984 argues for lazy evaluation as a mechanism for improving program modularity through separation of concerns, by easing independent implementation of producers and consumers of data streams.[36] Launchbury 1993 describes some difficulties that lazy evaluation introduces, particularly in analyzing a program's storage requirements, and proposes an operational semantics to aid in such analysis.[37] Harper 2009 proposes including both strict and lazy evaluation in the same language, using the language's type system to distinguish them.[38]
+
+Type systems
+
+Especially since the development of Hindley–Milner type inference in the 1970s, functional programming languages have tended to use typed lambda calculus, as opposed to the untyped lambda calculus used in Lisp and its variants (such as Scheme). The use of algebraic datatypes and pattern matching makes manipulation of complex data structures convenient and expressive; the presence of strong compile-time type checking makes programs more reliable, while type inference frees the programmer from the need to manually declare types to the compiler.
+
+Some research-oriented functional languages such as Coq, Agda, Cayenne, and Epigram are based on intuitionistic type theory, which allows types to depend on terms. Such types are called dependent types. These type systems do not have decidable type inference and are difficult to understand and program with. But dependent types can express arbitrary propositions in predicate logic. Through the Curry–Howard isomorphism, then, well-typed programs in these languages become a means of writing formal mathematical proofs from which a compiler can generate certified code. While these languages are mainly of interest in academic research (including in formalized mathematics), they have begun to be used in engineering as well. Compcert is a compiler for a subset of the C programming language that is written in Coq and formally verified.[39]
+
+A limited form of dependent types called generalized algebraic data types (GADT's) can be implemented in a way that provides some of the benefits of dependently typed programming while avoiding most of its inconvenience.[40] GADT's are available in the Glasgow Haskell Compiler, in OCaml (since version 4.00) and in Scala (as "case classes"), and have been proposed as additions to other languages including Java and C#.[41]
+
+Functional programming in non-functional languages
+
+It is possible to use a functional style of programming in languages that are not traditionally considered functional languages.[42] For example, both D and Fortran 95 explicitly support pure functions.[43]
+
+First-class functions have slowly been added to mainstream languages. For example, in early 1994, support for lambda, filter, map, and reduce was added to Python. Then during the development of Python 3000, Guido van Rossum called for the removal of these features.[44] However, he later changed his mind, and only reduce was removed,[45] though it remains accessible via the functools standard library module.[46] First-class functions were also introduced in PHP 5.3, Visual Basic 9, C# 3.0, and C++11.
+
+In Java, anonymous classes can sometimes be used to simulate closures;[47] however, anonymous classes are not always proper replacements to closures because they have more limited capabilities.[48] Java 8 supports lambda expressions as a replacement for some anonymous classes.[49] However, the presence of checked exceptions in Java can make functional programming inconvenient, because it can be necessary to catch checked exceptions and then rethrow them—a problem that does not occur in other JVM languages that do not have checked exceptions, such as Scala.
+Many object-oriented design patterns are expressible in functional programming terms: for example, the strategy pattern simply dictates use of a higher-order function, and the visitor pattern roughly corresponds to a catamorphism, or fold.
+
+Similarly, the idea of immutable data from functional programming is often included in imperative programming languages,[50] for example the tuple in Python, which is an immutable array.
+
+Comparison to imperative programming
+
+Functional programming is very different from imperative programming. The most significant differences stem from the fact that functional programming avoids side effects, which are used in imperative programming to implement state and I/O. Pure functional programming completely prevents side-effects and provides referential transparency, which makes it easier to verify, optimize, and parallelize programs, and easier to write automated tools to perform those tasks.
+
+Higher-order functions are rarely used in older imperative programming. Where a traditional imperative program might use a loop to traverse a list, a functional program would use a different technique. It would use a higher-order function that takes as arguments a function and a list. The higher-order function would then apply the given function to each element of the given list and then return a new list with the results.
+
+Simulating state
+
+There are tasks (for example, maintaining a bank account balance) that often seem most naturally implemented with state. Pure functional programming performs these tasks, and I/O tasks such as accepting user input and printing to the screen, in a different way.
+
+The pure functional programming language Haskell implements them using monads, derived from category theory. Monads offer a way to abstract certain types of computational patterns, including (but not limited to) modeling of computations with mutable state (and other side effects such as I/O) in an imperative manner without losing purity. While existing monads may be easy to apply in a program, given appropriate templates and examples, many students find them difficult to understand conceptually, e.g., when asked to define new monads (which is sometimes needed for certain types of libraries).[51]
+
+Another way in which functional languages can simulate state is by passing around a data structure that represents the current state as a parameter to function calls. On each function call, a copy of this data structure is created with whatever differences are the result of the function. This is referred to as 'state-passing style'.
+
+Impure functional languages usually include a more direct method of managing mutable state. Clojure, for example, uses managed references that can be updated by applying pure functions to the current state. This kind of approach enables mutability while still promoting the use of pure functions as the preferred way to express computations.
+
+Alternative methods such as Hoare logic and uniqueness have been developed to track side effects in programs. Some modern research languages use effect systems to make the presence of side effects explicit.
+
+Efficiency issues
+
+Functional programming languages are typically less efficient in their use of CPU and memory than imperative languages such as C and Pascal.[52] This is related to the fact that some mutable data structures like arrays have a very straightforward implementation using present hardware (which is a highly evolved Turing machine). Flat arrays may be accessed very efficiently with deeply pipelined CPUs, prefetched efficiently through caches (with no complex pointer-chasing), or handled with SIMD instructions. And it is not easy to create their equally efficient general-purpose immutable counterparts. For purely functional languages, the worst-case slowdown is logarithmic in the number of memory cells used, because mutable memory can be represented by a purely functional data structure with logarithmic access time (such as a balanced tree).[53] However, such slowdowns are not universal. For programs that perform intensive numerical computations, functional languages such as OCaml and Clean are only slightly slower than C.[54] For programs that handle large matrices and multidimensional databases, array functional languages (such as J and K) were designed with speed optimizations.
+
+Immutability of data can in many cases lead to execution efficiency by allowing the compiler to make assumptions that are unsafe in an imperative language, thus increasing opportunities for inline expansion.[55]
+
+Lazy evaluation may also speed up the program, even asymptotically, whereas it may slow it down at most by a constant factor (however, it may introduce memory leaks if used improperly). Launchbury 1993[37] discusses theoretical issues related to memory leaks from lazy evaluation, and O'Sullivan et al. 2008[56] give some practical advice for analyzing and fixing them. However, the most general implementations of lazy evaluation making extensive use of dereferenced code and data perform poorly on modern processors with deep pipelines and multi-level caches (where a cache miss may cost hundreds of cycles).
+
+Coding styles
+
+Imperative programs tend to emphasize the series of steps taken by a program in carrying out an action, while functional programs tend to emphasize the composition and arrangement of functions, often without specifying explicit steps. A simple example illustrates this with two solutions to the same programming goal (calculating Fibonacci numbers). The imperative example is in Python.
+
+Version 1 – With Generators
+
+
+
+# Fibonacci numbers, imperative style
+# https://docs.python.org/2.7/tutorial/modules.html
+def fibonacci(n, first = 0, second = 1):
+    for i in range(n):
+        yield first  # Return current iteration
+        first, second = second, first + second
+ 
+print [ x for x in fibonacci(10) ]
+
+Version 2 – Normal
+
+
+
+def fibonacci(n):
+    first, second = 0, 1
+    for i in range(n):
+        print first  # Print current iteration
+        first, second = second, first + second #Calculate next values
+ 
+fibonacci(10)
+
+Version 3 – Recursive
+
+
+
+def fibonacci(n, first = 0, second = 1):
+    if n == 1:
+        return [ first ]
+    else:
+        return [ first ] + fibonacci(n - 1, second, first + second)
+ 
+print fibonacci(10)
+
+Haskell
+
+A functional version (in Haskell) has a different feel to it:
+
+
+
+-- Fibonacci numbers, functional style
+ 
+-- describe an infinite list based on the recurrence relation for Fibonacci numbers
+fibRecurrence first second = first : fibRecurrence second (first + second)
+ 
+-- describe fibonacci list as fibRecurrence with initial values 0 and 1
+fibonacci = fibRecurrence 0 1
+ 
+-- describe action to print the 10th element of the fibonacci list
+main = print (fibonacci !! 10)
+
+Or, more concisely:
+
+
+
+fibonacci2 = 0:1:zipWith (+) fibonacci2 (tail fibonacci2)
+
+The imperative style describes the intermediate steps involved in calculating fibonacci(N), and places those steps inside a loop statement. In contrast, the functional implementation shown here states the mathematical recurrence relation that defines the entire Fibonacci sequence, then selects an element from the sequence (see also recursion). This example relies on Haskell's lazy evaluation to create an "infinite" list of which only as much as needed (the first 10 elements in this case) will actually be computed. That computation happens when the runtime system carries out the action described by "main".
+
+Erlang
+
+The same program in Erlang provides a simple example of how functional languages in general do not require their syntax to contain an "if" statement.
+
+
+
+-module(fibonacci).
+-export([start/1]).
+ 
+%% Fibonacci numbers in Erlang
+start(N) -> do_fib(0, 1, N).
+ 
+do_fib(_, B, 1) -> B;
+do_fib(A, B, N) -> do_fib(B, A + B, N - 1).
+
+This program is contained within a module called "fibonacci" and declares that the start/1 function will be visible from outside the scope of this module.
+
+The function start/1 accepts a single parameter (as denoted by the "/1" syntax) and then calls an internal function called do_fib/3.
+
+In direct contrast to the imperative coding style, Erlang does not need an "if" statement because the Erlang runtime will examine the parameters being passed to a function, and call the first function having a signature that matches the current pattern of parameters. (Erlang syntax does provide an "if" statement, but it is considered syntactic sugar and, compared to its usage in imperative languages, plays only a minor role in application logic design).
+
+In this case, it is unnecessary to test for a parameter value within the body of the function because such a test is implicitly performed by providing a set of function signatures that describe the different patterns of values that could be received by a function.
+
+In the case above, the first version of do_fib/3 will only be called when the third parameter has the precise value of 1. In all other cases, the second version of do_fib/3 will be called.
+
+This example demonstrates that functional programming languages often implement conditional logic implicitly by matching parameter patterns rather than explicitly by means of an "if" statement.
+
+Lisp
+
+The Fibonacci function can be written in Common Lisp as follows:
+
+
+
+(defun fib (n &optional (a 0) (b 1))
+  (if (= n 0)
+      a
+      (fib (- n 1) b (+ a b))))
+
+The program can then be called as
+
+
+
+(fib 10)
+
+D
+
+D has support for functional programming:
+
+
+
+import std.stdio;
+import std.range;
+ 
+void main()
+{
+    /* 'f' is a range representing the first 10 Fibonacci numbers */
+    auto f = recurrence!((seq, i) => seq[0] + seq[1])(0, 1)
+             .take(10);
+ 
+    writeln(f);
+}
+
+Use in industry
+
+Functional programming has long been popular in academia, but with few industrial applications.[57]:page 11 However, recently several prominent functional programming languages have been used in commercial or industrial systems. For example, the Erlang programming language, which was developed by the Swedish company Ericsson in the late 1980s, was originally used to implement fault-tolerant telecommunications systems.[8] It has since become popular for building a range of applications at companies such as T-Mobile, Nortel, Facebook, Électricité de France and WhatsApp.[7][9][58][59][60] The Scheme dialect of Lisp was used as the basis for several applications on early Apple Macintosh computers,[2][3] and has more recently been applied to problems such as training simulation software[4] and telescope control.[5] OCaml, which was introduced in the mid-1990s, has seen commercial use in areas such as financial analysis,[10] driver verification, industrial robot programming, and static analysis of embedded software.[11] Haskell, although initially intended as a research language,[13] has also been applied by a range of companies, in areas such as aerospace systems, hardware design, and web programming.[12][13]
+
+Other functional programming languages that have seen use in industry include Scala,[61] F#,[14][15] (both being functional-OO hybrids with support for both purely functional and imperative programming) Lisp,[62] Standard ML,[63][64] and Clojure.[65]
+
+See also
+
+Comparison of programming paradigms
+Eager evaluation
+List of functional programming topics
+Nested function
+Inductive functional programming
+Functional reactive programming
+References
+
+^ Jump up to: a b Hudak, Paul (September 1989). "Conception, evolution, and application of functional programming languages" (PDF). ACM Computing Surveys 21 (3): 359–411. doi:10.1145/72551.72554.
+^ Jump up to: a b Clinger, Will (1987). "MultiTasking and MacScheme". MacTech 3 (12). Retrieved 2008-08-28.
+^ Jump up to: a b Hartheimer, Anne (1987). "Programming a Text Editor in MacScheme+Toolsmith". MacTech 3 (1). Retrieved 2008-08-28.
+^ Jump up to: a b Kidd, Eric. Terrorism Response Training in Scheme. CUFP 2007. Retrieved 2009-08-26.
+^ Jump up to: a b Cleis, Richard. Scheme in Space. CUFP 2006. Retrieved 2009-08-26.
+Jump up ^ "State-Based Scripting in Uncharted 2". Retrieved 2011-08-08.
+^ Jump up to: a b "Who uses Erlang for product development?". Frequently asked questions about Erlang. Retrieved 2007-08-05.
+^ Jump up to: a b Armstrong, Joe (June 2007). A history of Erlang. Third ACM SIGPLAN Conference on History of Programming Languages. San Diego, California. Retrieved 2009-08-29.
+^ Jump up to: a b Larson, Jim (March 2009). "Erlang for concurrent programming". Communications of the ACM 52 (3): 48. doi:10.1145/1467247.1467263.
+^ Jump up to: a b Minsky, Yaron; Weeks, Stephen (July 2008). "Caml Trading — experiences with functional programming on Wall Street". Journal of Functional Programming (Cambridge University Press) 18 (4): 553–564. doi:10.1017/S095679680800676X. Retrieved 2008-08-27.
+^ Jump up to: a b Leroy, Xavier. Some uses of Caml in Industry. CUFP 2007. Retrieved 2009-08-26.
+^ Jump up to: a b "Haskell in industry". Haskell Wiki. Retrieved 2009-08-26. Haskell has a diverse range of use commercially, from aerospace and defense, to finance, to web startups, hardware design firms and lawnmower manufacturers.
+^ Jump up to: a b c Hudak, Paul; Hughes, J.; Jones, S. P.; Wadler, P. (June 2007). A history of Haskell: being lazy with class. Third ACM SIGPLAN Conference on History of Programming Languages. San Diego, California. doi:10.1145/1238844.1238856. Retrieved 2013-09-26.
+^ Jump up to: a b Mansell, Howard (2008). Quantitative Finance in F#. CUFP 2008. Retrieved 2009-08-29.
+^ Jump up to: a b Peake, Alex (2009). The First Substantial Line of Business Application in F#. CUFP 2009. Retrieved 2009-08-29.
+Jump up ^ "The useR! 2006 conference schedule includes papers on the commercial use of R". R-project.org. 2006-06-08. Retrieved 2011-06-20.
+Jump up ^ Chambers, John M. (1998). Programming with Data: A Guide to the S Language. Springer Verlag. pp. 67–70. ISBN 978-0-387-98503-9.
+Jump up ^ Department of Applied Math, University of Colorado. "Functional vs. Procedural Programming Language". Retrieved 2006-08-28.
+Jump up ^ Dimitre Novatchev. "The Functional Programming Language XSLT — A proof through examples". TopXML. Retrieved May 27, 2006.
+Jump up ^ David Mertz. "XML Programming Paradigms (part four): Functional Programming approached to XML processing". IBM developerWorks. Retrieved May 27, 2006.
+Jump up ^ OPtimized Applicative Language
+Jump up ^ Donald D. Chamberlin and Raymond F. Boyce (1974). "SEQUEL: A structured English query language". Proceedings of the 1974 ACM SIGFIDET: 249–264.
+Jump up ^ Dominus, Mark J. (2005). Higher-Order Perl. Morgan Kaufmann. ISBN 1-55860-701-3.
+Jump up ^ Holywell, Simon (2014). Functional Programming in PHP. php[architect]. ISBN 9781940111056.
+Jump up ^ "Effective Scala". Scala Wiki. Retrieved 2012-02-21. Effective Scala.
+Jump up ^ Haskell Brooks Curry; Robert Feys (1958). Combinatory Logic. North-Holland Publishing Company. Retrieved 10 February 2013.
+Jump up ^ McCarthy, John (June 1978). "History of Lisp". In ACM SIGPLAN History of Programming Languages Conference: 217–223. doi:10.1145/800025.808387.
+Jump up ^ The memoir of Herbert A. Simon (1991), Models of My Life pp.189-190 ISBN 0-465-04640-1 claims that he, Al Newell, and Cliff Shaw are "commonly adjudged to be the parents of [the] artificial intelligence [field]", for writing Logic Theorist, a program which proved theorems from Principia Mathematica automatically. In order to accomplish this, they had to invent a language and a paradigm which, which viewed retrospectively, embeds functional programming.
+Jump up ^ http://www.stanford.edu/class/cs242/readings/backus.pdf
+Jump up ^ R.M. Burstall. Design considerations for a functional programming language. Invited paper, Proc. Infotech State of the Art Conf. "The Software Revolution", Copenhagen, 45–57 (1977)
+Jump up ^ R.M. Burstall and J. Darlington. A transformation system for developing recursive programs. Journal of the Association for Computing Machinery 24(1):44–67 (1977)
+Jump up ^ R.M. Burstall, D.B. MacQueen and D.T. Sannella. HOPE: an experimental applicative language. Proc. 1980 LISP Conference, Stanford, 136–143 (1980).
+Jump up ^ Dick Pountain. "Functional Programming Comes of Age". BYTE.com (August 1994). Retrieved August 31, 2006.
+Jump up ^ Turner, D.A. (2004-07-28). "Total Functional Programming". Journal of Universal Computer Science 10 (7): 751–768. doi:10.3217/jucs-010-07-0751.
+Jump up ^ The Implementation of Functional Programming Languages. Simon Peyton Jones, published by Prentice Hall, 1987
+Jump up ^ Hughes, John (1984). "Why Functional Programming Matters".
+^ Jump up to: a b John Launchbury (1993). "A Natural Semantics for Lazy Evaluation".
+Jump up ^ Robert W. Harper (2009). Practical Foundations for Programming Languages.
+Jump up ^ "The Compcert verified compiler".
+Jump up ^ Simon Peyton Jones, Dimitrios Vytiniotis, Stephanie Weirich, and Geoffrey Washburn. "Simple unification-based type inference for GADTs". ICFP 2006. pp. 50–61.
+Jump up ^ Andrew Kennedy and Claudio Russo (October 2005). "Generalized Algebraic Data Types and Object-Oriented Programming". OOPSLA. San Diego, California. source of citation
+Jump up ^ Hartel, Pieter; Henk Muller and Hugh Glaser (March 2004). "The Functional C experience" (PDF). The Journal of Functional Programming 14 (2): 129–135. doi:10.1017/S0956796803004817. ; David Mertz. "Functional programming in Python, Part 3". IBM developerWorks. Retrieved 2006-09-17.(Part 1, Part 2)
+Jump up ^ "Functions — D Programming Language 2.0". Digital Mars. Retrieved 2011-06-20.
+Jump up ^ van Rossum, Guido (2005-03-10). "The fate of reduce() in Python 3000". Artima.com. Retrieved 2012-09-27.
+Jump up ^ van Rossum, Guido (2009-04-21). "Origins of Python's "Functional" Features". The History of Python. Retrieved 2012-09-27.
+Jump up ^ "functools — Higher order functions and operations on callable objects". Python Software Foundation. 2011-07-31. Retrieved 2011-07-31.
+Jump up ^ Skarsaune, Martin (2008). The SICS Java Port Project Automatic Translation of a Large Object Oriented System from Smalltalk to Java.
+Jump up ^ Gosling, James. "Closures". James Gosling: on the Java Road. Oracle. Retrieved 11 May 2013.
+Jump up ^ "Java SE 8 Lambda Quick Start".
+Jump up ^ Bloch, Joshua. Effective Java (Second ed.). pp. Item 15.
+Jump up ^ Newbern, J. "All About Monads: A comprehensive guide to the theory and practice of monadic programming in Haskell". Retrieved 2008-02-14.
+Jump up ^ Larry C. Paulson (28 June 1996). ML for the Working Programmer. Cambridge University Press. ISBN 978-0-521-56543-1. Retrieved 10 February 2013.
+Jump up ^ Daniel Spiewak. "Implementing Persistent Vectors in Scala". Retrieved Apr 17, 2012.
+Jump up ^ "Which programs are fastest? | Computer Language Benchmarks Game". benchmarksgame.alioth.debian.org. Retrieved 2011-06-20.
+Jump up ^ Igor Pechtchanski and Vivek Sarkar (2005). "Immutability specification and its applications". Concurrency and Computation: Practice and Experience 17 (5–6): 639–662. doi:10.1002/cpe.853.
+Jump up ^ "Chapter 25. Profiling and optimization". Book.realworldhaskell.org. Retrieved 2011-06-20.
+Jump up ^ Odersky, Martin; Spoon, Lex; Venners, Bill (December 13, 2010). Programming in Scala: A Comprehensive Step-by-step Guide (2nd ed.). Artima Inc. pp. 883/852. ISBN 978-0-9815316-4-9.
+Jump up ^ Piro, Christopher (2009). Functional Programming at Facebook. CUFP 2009. Retrieved 2009-08-29.
+Jump up ^ "Sim-Diasca: a large-scale discrete event concurrent simulation engine in Erlang". November 2011.
+Jump up ^ 1 million is so 2011 // WhatsApp blog, 2012-01-06: "the last important piece of our infrastracture is Erlang"
+Jump up ^ Momtahan, Lee (2009). Scala at EDF Trading: Implementing a Domain-Specific Language for Derivative Pricing with Scala. CUFP 2009. Retrieved 2009-08-29.
+Jump up ^ Graham, Paul (2003). "Beating the Averages". Retrieved 2009-08-29.
+Jump up ^ Sims, Steve (2006). Building a Startup with Standard ML. CUFP 2006. Retrieved 2009-08-29.
+Jump up ^ Laurikari, Ville (2007). Functional Programming in Communications Security. CUFP 2007. Retrieved 2009-08-29.
+Jump up ^ Lorimer, R. J. "Live Production Clojure Application Announced".
+Further reading
+
+Abelson, Hal; Sussman, Gerald Jay (1985). Structure and Interpretation of Computer Programs. MIT Press.
+Cousineau, Guy and Michel Mauny. The Functional Approach to Programming. Cambridge, UK: Cambridge University Press, 1998.
+Curry, Haskell Brooks and Feys, Robert and Craig, William. Combinatory Logic. Volume I. North-Holland Publishing Company, Amsterdam, 1958.
+Curry, Haskell B.; Hindley, J. Roger; Seldin, Jonathan P. (1972). Combinatory Logic. Vol. II. Amsterdam: North Holland. ISBN 0-7204-2208-6.
+Dominus, Mark Jason. Higher-Order Perl. Morgan Kaufmann. 2005.
+Felleisen, Matthias; Findler, Robert; Flatt, Matthew; Krishnamurthi, Shriram (2001). How to Design Programs. MIT Press.
+Graham, Paul. ANSI Common LISP. Englewood Cliffs, New Jersey: Prentice Hall, 1996.
+MacLennan, Bruce J. Functional Programming: Practice and Theory. Addison-Wesley, 1990.
+O'Sullivan, Brian; Stewart, Don; Goerzen, John (2008). Real World Haskell. O'Reilly.
+Pratt, Terrence, W. and Marvin V. Zelkowitz. Programming Languages: Design and Implementation. 3rd ed. Englewood Cliffs, New Jersey: Prentice Hall, 1996.
+Salus, Peter H. Functional and Logic Programming Languages. Vol. 4 of Handbook of Programming Languages. Indianapolis, Indiana: Macmillan Technical Publishing, 1998.
+Thompson, Simon. Haskell: The Craft of Functional Programming. Harlow, England: Addison-Wesley Longman Limited, 1996.
+External links
+
+Ford, Neal (2012-01-29). "Functional thinking: Why functional programming is on the rise". Retrieved 2013-02-24.
+Akhmechet, Slava (2006-06-19). "defmacro – Functional Programming For The Rest of Us". Retrieved 2013-02-24. An introduction
+Functional programming in Python (by David Mertz): part 1, part 2, part 3
+Retrieved from "http://en.wikipedia.org/w/index.php?title=Functional_programming&oldid=647970125"
+Categories: Programming paradigmsFunctional programming
+This page was last modified on 20 February 2015, at 01:32.
+Text is available under the Creative Commons Attribution-ShareAlike License; additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.

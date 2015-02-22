@@ -1,0 +1,55 @@
+Datalogi
+
+Fra Wikipedia, den frie encyklopædi
+Datalogi er læren om data og behandling af data – især vha. maskiner og computere, dvs. studiet af det teoretiske grundlag for alle former for behandling af data. Der undervises primært i datalogi på universitetet, hvor man efter opnåelse af 240-300 ECTS point, får en kandidatgrad som for eksempel cand. scient. (eng.: m.sc. (comp. sci.)) og herved bliver datalog.
+
+Ordet er dannet 8. marts 1966 af Peter Naur[1] og benyttes hovedsageligt i de nordiske lande som alternativ til det engelske begreb Computer Science (eng.) og det franske informatique, som det tyske begreb informatik også kommer fra. På dansk har man også begrebet informatik, som dog dækker over nogle andre konnotationer end datalogi.
+
+Peter Naur grundlagde endvidere det første datalogiske institut; Datalogisk Institut ved Københavns Universitet (DIKU).
+
+Siden datalogiens spæde skridt i midten af det 20. århundrede, har det været diskuteret, hvilket navn der skulle knyttes til den nye videnskab. Valget af datalogi i stedet for computervidenskab skal ses som et ønske om at lægge vægt på, at studiet ikke er et studie af de specifikke maskiner, computerne, men af data generelt. Således rækker datalogien langt længere tilbage end de første computere, og selv hulemalerier og røgsignaler kan ses som en form for databehandling.
+
+På dansk anvendes i forbindelse med computere også begreberne IT og EDB, men disse henviser til den praktiske anvendelse af computere og ikke videnskaben datalogi.
+
+Indholdsfortegnelse
+
+1 Datalogiske områder
+2 Datalogi i Danmark
+3 Noter
+4 Eksterne henvisninger
+Datalogiske områder
+
+Datalogi omfatter en række underområder af både teoretisk og praktisk karakter. Emnerne beregnelighed, afgørlighed og kompleksitet udforsker de fundamentale egenskaber ved beregning. Programmering, oversætterteknik, maskinarkitektur, netværksprotokoller og billedbehandling og interaktionen mellem maskine og menneske er alle områder som udforsker praktiske problemstillinger.
+
+Desuden findes algoritmik, hvor man konstruerer og analyserer måder at løse abstrakte problemer på, for eksempel effektiv sortering og korteste vej i en graf, kryptologi.
+
+Datalogi kan desuden kobles til andre videnskabelige områder: Datalingvistik, bioinformatik, kunstig intelligens
+
+Datalogi i Danmark
+
+I Danmark undervises og forskes i datalogi på universitetsniveau ved følgende otte universiteter:
+
+DAIMI (Datalogisk Afdeling I Matematisk Institut) på Aarhus Universitet
+Hedder nu CS AU, dvs: Department of Computer Science, Aarhus University
+Datalogisk Afdeling på Roskilde Universitet
+DIKU (Datalogisk Institut) på Københavns Universitet
+IMADA (Institut for Matematik og Datalogi) på Syddansk Universitet
+Institut for Datalogi på Aalborg Universitet
+Institut for Informatik på Copenhagen Business School
+IMM (Informatik og Matematisk Modellering) på Danmarks Tekniske Universitet
+IT-Universitetet i København
+Noter
+
+Hoppe op ↑ Jens Damgaard Andersen: "Datalogiens videnskabsteori", isis.ku.dk, set 13. oktober 2009
+Eksterne henvisninger
+
+ Commons-logo.svg Wikimedia Commons har flere filer relateret til Datalogi
+Fagsiden for datalogi, Københavns Universitetsbibliotek
+Programmering	Stub
+Denne artikel om datalogi eller et datalogi-relateret emne er kun påbegyndt. Hvis du ved mere om emnet, kan du hjælpe Wikipedia ved at udvide den.
+Autoritetsdata	
+GND: 4026894-9
+Hentet fra "http://da.wikipedia.org/w/index.php?title=Datalogi&oldid=7758398"
+Kategorier: DatalogiAkademiske disciplinerVideregående uddannelser i Danmark
+Denne side blev senest ændret den 5. september 2014 kl. 09:09.
+Tekst er tilgængelig under Creative Commons Navngivelse/Del på samme vilkår 3.0; yderligere betingelser kan være gældende. Se brugsbetingelserne for flere oplysninger.

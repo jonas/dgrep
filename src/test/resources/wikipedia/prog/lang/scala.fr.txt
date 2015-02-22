@@ -1,0 +1,114 @@
+Scala (langage)
+
+Scala
+Logo.
+Apparu en	2003
+Auteur	Martin Odersky
+Développeur	Programming Methods Laboratory of EPFL
+Dernière version stable	2.11.1 (le 21 mai 2014)
+Version en développement	2.11.0-M5
+Paradigme	Objet, impératif, fonctionnel
+Typage	statique, fort, inféré, structurel
+Influencé par	Eiffel, Java, Pizza1, Haskell, Erlang, Standard ML, OCaml, Smalltalk
+Système d'exploitation	JVM, CLR
+Licence	BSD
+Site web	www.scala-lang.org
+Scala est un langage de programmation multi-paradigme conçu à l'École polytechnique fédérale de Lausanne (EPFL) pour exprimer les modèles de programmation courants dans une forme concise et élégante. Son nom vient de l'anglais Scalable language qui signifie à peu près « langage adaptable » ou « langage qui peut être mis à l'échelle ». Il peut en effet être vu comme un métalangage.
+
+Scala intègre les paradigmes de programmation orientée objet et de programmation fonctionnelle, avec un typage statique. Il concilie ainsi ces deux paradigmes habituellement opposés (à de rares exceptions près, telle que le langage OCaml) et offre au développeur la possibilité de choisir le paradigme le plus approprié à son problème.
+
+Il est prévu pour être compilé en bytecode Java (exécutable sur la JVM), ou .Net. Ces deux plateformes sont supportées officiellement par l'EPFL.
+
+Si on souhaite l'utiliser exclusivement avec la JVM, il est alors possible d'utiliser les bibliothèques écrites en Java de façon complètement transparente. Ainsi, Scala bénéficie de la maturité et de la diversité des bibliothèques qui ont fait la force de Java depuis une dizaine d'années. De plus, il est possible d'invoquer du code écrit en Scala à partir de programmes écrits en Java ce qui facilite la transition de Java à Scala.
+
+Les développeurs habitués à un seul paradigme (par exemple ceux ayant utilisé principalement Java qui, lui, repose sur la programmation orientée objet) peuvent trouver ce langage déroutant et difficile car il nécessite l'apprentissage de concepts différents si on veut pouvoir exploiter tout son potentiel. Néanmoins, il est tout à fait possible de l'utiliser dans un premier temps comme remplaçant de Java, en profitant alors de sa syntaxe épurée, puis d'utiliser les différents « nouveaux » concepts au fur et à mesure de leur apprentissage.
+
+Sommaire
+
+1 Exemple Hello World
+2 Outils
+2.1 Intégration IDE, éditeur de texte
+2.2 Frameworks de Tests
+3 Notes et références
+4 Liens externes
+4.1 Références
+4.2 Outils de développement
+Exemple Hello World
+
+Le programme Hello world écrit en Scala, à la manière de Java :
+
+
+
+object HelloWorld {
+  def main(args: Array[String]) {
+    println("Hello, world!")
+  }
+}
+
+ou bien simplement sans déclaration de classe et de méthode statique, avec un simple objet singleton :
+
+
+
+object HelloWorld extends App {
+  println("Hello, world!")
+}
+
+Un de ces deux exemples peut être enregistré dans un fichier HelloWorld.scala et compilé en ligne de commande :
+
+$ scalac HelloWorld.scala
+
+puis exécuté :
+
+$ scala -classpath . HelloWorld
+
+En utilisant Scala à la manière d'un langage de script :
+
+
+
+println("Hello, world!")
+
+est enregistré dans un fichier HelloWorld2.scala, puis exécuté directement en ligne de commande :
+
+$ scala HelloWorld2.scala
+
+Le code source peut aussi être fourni directement à l'interpréteur avec l'option -e :
+
+$ scala -e 'println("Hello, World!")'
+
+Outils
+
+Intégration IDE, éditeur de texte
+
+Plugin pour Eclipse
+Plugin pour Intellij IDEA
+Vim Scala
+Emacs Scala
+Scala Build tool
+Scala Maven Plugin
+Frameworks de Tests
+
+ScalaTest
+Specs2
+ScalaCheck
+ScalaMock
+Notes et références
+
+Martin Odersky et al., An Overview of the Scala Programming Language, 2nd Edition.
+Liens externes
+
+Références
+
+(en) Site officiel du langage.
+(en) Typesafe, la société fondée par Martin Odersky, le créateur de Scala, qui propose un support pour les utilisateurs professionnels et offre un ensemble officiel de logiciels (stack), composé d'Akka et de Play (voir ci-dessous).
+(en) Site officiel d'Akka, plateforme logicielle permettant la programmation concurrente à base d'acteurs (Akka est inspiré par l'OTP d'Erlang).
+(en) Site officiel de Play, canevas Java/Scala pour le développement de sites web.
+(en) Site officiel de Lift, canevas 100 % Scala pour le développement de sites web.
+(en) Site officiel de Scalatra micro-canevas web inspiré de Sinatra (Ruby).
+Outils de développement
+
+(en) Site officiel de Scala IDE, environnement de développement intégré (IDE) pour Eclipse.
+(en) Site officiel de Scala SBT, moteur de production (build tool).
+Ce document provient de « http://fr.wikipedia.org/w/index.php?title=Scala_(langage)&oldid=108014950 ».
+Dernière modification de cette page le 6 octobre 2014 à 19:17.
+Droit d'auteur : les textes sont disponibles sous licence Creative Commons paternité partage à l’identique ; d’autres conditions peuvent s’appliquer. Voyez les conditions d’utilisation pour plus de détails, ainsi que les crédits graphiques. En cas de réutilisation des textes de cette page, voyez comment citer les auteurs et mentionner la licence.
+Wikipedia® est une marque déposée de la Wikimedia Foundation, Inc., organisation de bienfaisance régie par le paragraphe 501(c)(3) du code fiscal des États-Unis.

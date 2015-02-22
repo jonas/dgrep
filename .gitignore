@@ -1,0 +1,4 @@
+*.swp
+.vagrant/
+project/target/
+target/

@@ -1,0 +1,62 @@
+Funktionel programmering
+
+Fra Wikipedia, den frie encyklopædi
+Inden for datalogi er funktionsorienteret programmering, funktionel programmering eller funktionsprogrammering et programmeringsparadigme hvor man betragter beregning som evalueringen af matematiske funktioner.
+
+Resultatet af et program er i denne sammenhæng returværdien fra en funktion anvendt på en værdi. Derfor kalder man også funktionsorienteret programmering for værdiorienteret programmering. Funktionsorienteret programmering tilhører genren deklarativ programmering fordi man erklærer (eng. declare) hvad man gerne vil beregne frem for hvordan det skal beregnes.
+
+Bag funktionsorienteret programmering ligger den abstrakte model Lambda-kalkylen. Denne model står historisk i kontrast til den abstrakte model Turing-maskinen, som er udgangspunktet for det mere udbredte programmeringsparadigme, imperativ programmering (eller tilstandsorienteret programmering). Selvom de to paradigmer har forskellige abstrakte modeller, så viste Church-Turing-tesen at de er ækvivalente: At enhver beregning som den ene model kan beskrive, kan den anden også beskrive, og omvendt.
+
+Indholdsfortegnelse
+
+1 Etymologi
+2 Beskrivelse
+3 Historie
+4 Se også
+Etymologi
+
+På dansk hersker en sprogdebat om hvilket af de tre ovenstående begreber som bedst beskriver programmeringsparadigmet. Argumenterne for og imod begrebet funktionel programmering er at det er den mest direkte oversættelse af det engelske functional programming, men det kan forveksles med den urelaterede betydning programmering, der fungerer.
+
+Argumenterne for og imod begrebet funktionsprogrammering er at det er kortfattet og utvetydigt, men det er ikke den mest populære betegnelse, hvilket kan henlede til misforståelsen at der blot er tale om anvendelse af funktioner og ikke det omfattende paradigme, hvor funktioner har særstatus.
+
+Argumenterne for og imod begrebet funktionsorienteret programmering er: Det bærer en vis lighed med andre begreber som objektorienteret programmering og aspektorienteret programmering, men det er endnu mindre udbredt. Samtidigt kan tillægsordet funktionsorienteret bruges om enkelte egenskaber ved multi-paradigme-programmeringssprog, således at et sprog også kan være funktionsorienteret uden at det er det herskende paradigme.
+
+Beskrivelse
+
+Matematiske funktionerer har en værdimængde (inputværdier, x'er) og en definitionsmængde (returværdier, y'er). Hvis en funktion beregner andet end sin returværdi, kalder man det en bivirkning eller sprogligt mindre korrekt en sideeffekt (fra eng. side effect). Bivirkninger kan opdeles i dem som gemmer tilstand i hukommelsen og dem som udfører I/O, eksempelvis at læse fra/skrive til filer, kommunikation over netværk eller at opdatere en grafisk grænseflade. Man siger derfor at ren funktionsprogrammering er at programmere med funktioner uden bivirkninger.
+
+Det står i modsætning til imperativ programmering hvor funktioner ikke behøver at leve op til den matematiske definition og kan ændre på variable uden for funktionens virkefelt. Det vil naturligvis gøre de fleste programmer nytteløse, hvis man betragter formidlingen af resultater som en bivirkning (og derved ser bort fra resultatet af enhver funktion), og programmeringssprog kan derfor opdeles i hvilken grad af renhed (eng. purity) de besidder.
+
+Præcis hvornår et programmeringssprog er funktionsorienteret er ikke entydigt. Nogle mener at rigtige funktionsorienterede programmeringssprog kun består af funktioner, som eksempelvis Lambda-kalkylen, SKI-kalkylen eller sproget Unlambda (som også kategoriseres som et esoterisk programmeringssprog). Andre mener at de ingen bivirkninger må have, selvom dette hurtigt bliver upraktisk. Et eksempel på et sådan sprog er Haskell. Endnu andre mener at det er nok hvis funktioner har førsteklassestatus.
+
+Eksempler på programmeringssprog, der anvender aspekter af funktionsprogrammering: Standard ML, Lisp, Scheme, Clojure, Erlang, O'Caml Scala, Haskell, F#.
+
+Historie
+
+Funktionsprogrammering har sit udspring i Lambda-kalkulus, der blev udviklet i 1930'erne til at analysere hvad det er muligt at beregne matematisk og til at undersøge rekursive funktioner. Programmeringssprog der bygger på funktionsprogrammering kan derfor siges at være en udvidelse af Lambda-kalkylen.
+
+Et af de tidligste funktionsorienterede programmeringssprog var Lisp som blev udviklet af John McCarthy i 1950'erne mens han arbejdede på Massachusetts Institute of Technology (MIT). Mange egenskaber ved Lisp finder man i dag i andre funktionsorientede programmeringssprog.
+
+Information Processing Language (IPL) bliver nogle gange betragtet som det første funktionsorienterede programmeringssprog. Det er et assembly-lignende sprog til at manipulere lister af symboler. Det benytter et begreb kaldet en generator, der svarer til en funktion, der kan tage en anden funktion som argument. Sproget afhænger dog i stor grad af mutérbare lister.
+
+Kenneth E. Iverson udviklede APL som han beskrev i sin bog A Programming Language (ISBN 9780471430148) fra 1962. APL var den primære indflydelse på John Backus' programmeringssprog FP.
+
+John Backus vandt i 1977 Turing-prisen og præsenterede FP ved sin forelæsning under titlen Kan programmering frigøres fra von Neumann-stilen? En funktionel stil og dens algebra af programmer. Her definerede han funktionelle programmer som bygget på hierarkisk vis ved at kombinere former som tillader en algebra af programmer. I et andet sprog betyder det at funktionelle programmer kan komponeres ved at anvende funktioner på hinanden.
+
+Backus' videnskabelige artikel populariserede forskning i funktionsprogrammering, selvom den fokuserede på programmering på funktionsniveau snarere end stilen forbundet med Lambda-kalkulus som i dag er forbundet til funktionsprogrammering.
+
+I 1970'erne skabte Robin Milner sproget ML, der stod for Meta Language, ved Edinburgh University. David Turner udviklede SASL ved St. Andrews University og senere Miranda ved Kent University. ML udviklede sig efterfølgende til flere dialekter, og i dag er de mest populære OCaml, Standard ML og F#.
+
+I 1970'erne blev Scheme også udviklet som en delvist funktionsorienteret dialekt af Lisp. Scheme blev populariseret igennem de indflydelsesrige Lambda Papers og igennem den famøse bog Structure and Interpretation of Computer Programs fra 1985 med tilhørende videoforelæsninger.
+
+I 1980'erne udviklede Per Martin-Löf den intuitionistiske typeteori (også kendt som konstruktiv typeteori), hvilket forbandt funktionelle programmer med konstruktive beviser af vilkårligt komplekse matematiske udsagn. Disse beviser er udtrykt ved hjælp af afhængige typer (eng. dependent types). Dette medførte mange nye tilgange til automatisk bevisførelse og har påvirket udviklingen af flere funktionsprogrammeringssprog.
+
+I 1987 opstod Haskell ved et konsensus om at formulere en åben standard for forskning inden for funktionsprogrammering, og den er efterfølgende blevet brugt som platform for dette.
+
+Se også
+
+Mutabilitet
+Hentet fra "http://da.wikipedia.org/w/index.php?title=Funktionel_programmering&oldid=7618889"
+Kategori: Programmering
+Denne side blev senest ændret den 8. maj 2014 kl. 13:13.
+Tekst er tilgængelig under Creative Commons Navngivelse/Del på samme vilkår 3.0; yderligere betingelser kan være gældende. Se brugsbetingelserne for flere oplysninger.
