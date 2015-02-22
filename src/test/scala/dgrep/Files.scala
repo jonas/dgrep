@@ -17,6 +17,15 @@ class FilesSpec extends FlatSpec with Matchers {
 
   val wikipedia = TestData("wikipedia")
   val effectiveScala = TestData("effective-scala")
+  val nonExistent = TestData("non-existent-directory")
+  val emptyDirectory = TestData("empty-directory", "target")
+
+  "test setup" should "complete with success" in {
+    emptyDirectory.dir.mkdir()
+    emptyDirectory.dir.exists should be (true)
+
+    nonExistent.dir.exists should be (false)
+  }
 
   "listDescendantDirectories" should "find all sub-directories in multi-level directory structure" in {
     val dirs = listDescendantDirectories(wikipedia.dir)
@@ -36,19 +45,12 @@ class FilesSpec extends FlatSpec with Matchers {
   }
 
   it should "find no sub-directories in empty directory structure" in {
-    val empty = TestData("empty-directory", "target")
+    val dirs = listDescendantDirectories(emptyDirectory.dir)
 
-    empty.dir.mkdir()
-    empty.dir.exists should be (true)
-
-    val dirs = listDescendantDirectories(empty.dir)
-
-    dirs.map(empty.stripPath) should contain only (".")
+    dirs.map(emptyDirectory.stripPath) should contain only (".")
   }
 
   it should "find no directories for non existent directory" in {
-    val nonExistent = TestData("non-existent-directory")
-
     val dirs = listDescendantDirectories(nonExistent.dir)
 
     dirs.map(nonExistent.stripPath) shouldBe empty
