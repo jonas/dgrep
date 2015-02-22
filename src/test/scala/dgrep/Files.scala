@@ -35,4 +35,22 @@ class FilesSpec extends FlatSpec with Matchers {
     dirs.map(effectiveScala.stripPath) should contain only (".")
   }
 
+  it should "find no sub-directories in empty directory structure" in {
+    val empty = TestData("empty-directory", "target")
+
+    empty.dir.mkdir()
+    empty.dir.exists should be (true)
+
+    val dirs = listDescendantDirectories(empty.dir)
+
+    dirs.map(empty.stripPath) should contain only (".")
+  }
+
+  it should "find no directories for non existent directory" in {
+    val nonExistent = TestData("non-existent-directory")
+
+    val dirs = listDescendantDirectories(nonExistent.dir)
+
+    dirs.map(nonExistent.stripPath) shouldBe empty
+  }
 }
