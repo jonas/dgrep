@@ -16,6 +16,7 @@ class FilesSpec extends FlatSpec with Matchers {
   }
 
   val wikipedia = TestData("wikipedia")
+  val wikipediaProgLang = TestData("wikipedia/prog/lang")
   val effectiveScala = TestData("effective-scala")
   val nonExistent = TestData("non-existent-directory")
   val emptyDirectory = TestData("empty-directory", "target")
@@ -55,4 +56,41 @@ class FilesSpec extends FlatSpec with Matchers {
 
     dirs.map(nonExistent.stripPath) shouldBe empty
   }
+
+  "listDirectoryFiles" should "find no files in a non existent directory" in {
+    val files = listDirectoryFiles(nonExistent.dir)
+
+    files.map(nonExistent.stripPath) shouldBe empty
+  }
+
+  it should "find no files in am empty directory" in {
+    val files = listDirectoryFiles(emptyDirectory.dir)
+
+    files.map(emptyDirectory.stripPath) shouldBe empty
+  }
+
+  it should "find all files in a multi-level directory structure" in {
+    val rootFiles = listDirectoryFiles(wikipedia.dir)
+    rootFiles.map(wikipedia.stripPath) should contain only ("./README.md")
+
+    val progLangFiles = listDirectoryFiles(wikipediaProgLang.dir)
+    progLangFiles.map(wikipediaProgLang.stripPath) should contain allOf (
+      "./haskell.txt",
+      "./scala.da.txt",
+      "./scala.fr.txt",
+      "./scala.txt"
+    )
+  }
+
+  it should "find all files in a flat directory structure" in {
+    val files = listDirectoryFiles(effectiveScala.dir)
+
+    files.map(effectiveScala.stripPath) should contain allOf (
+      "./effectivescala-cn.mo",
+      "./effectivescala-ja.mo",
+      "./effectivescala.mo",
+      "./README.md"
+    )
+  }
+
 }

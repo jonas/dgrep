@@ -12,6 +12,9 @@ object Files {
         listFiles(root) filter (_.isDirectory) flatMap listDescendantDirectories
       })
 
+  def listDirectoryFiles(dir: File): Stream[File] =
+    listFiles(dir) filter (!_.isDirectory)
+
   /*
    * List directory files and gracefully handle the case where the
    * passed directory does not exist or is not a direcoty in which
