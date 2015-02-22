@@ -93,4 +93,49 @@ class FilesSpec extends FlatSpec with Matchers {
     )
   }
 
+  "listAllDescendantFiles" should "find no files in a non existent directory" in {
+    val files = listAllDescendantFiles(nonExistent.dir)
+
+    files.map(nonExistent.stripPath) shouldBe empty
+  }
+
+  it should "find no files in am empty directory" in {
+    val files = listAllDescendantFiles(emptyDirectory.dir)
+
+    files.map(emptyDirectory.stripPath) shouldBe empty
+  }
+
+  it should "find all files in a multi-level directory structure" in {
+    val rootFiles = listAllDescendantFiles(wikipedia.dir)
+
+    rootFiles.map(wikipedia.stripPath) should contain allOf (
+      "./README.md",
+      "./canada/constitution.fr.txt",
+      "./canada/constitution.txt",
+      "./canada/montreal.ar.txt",
+      "./canada/montreal.txt",
+      "./canada/quebec.da.txt",
+      "./canada/quebec.fr.txt",
+      "./prog/computer-science.da.txt",
+      "./prog/computer-science.txt",
+      "./prog/functional.da.txt",
+      "./prog/functional.txt",
+      "./prog/lang/haskell.txt",
+      "./prog/lang/scala.da.txt",
+      "./prog/lang/scala.fr.txt",
+      "./prog/lang/scala.txt"
+    )
+  }
+
+  it should "find all files in a flat directory structure" in {
+    val files = listAllDescendantFiles(effectiveScala.dir)
+
+    files.map(effectiveScala.stripPath) should contain allOf (
+      "./effectivescala-cn.mo",
+      "./effectivescala-ja.mo",
+      "./effectivescala.mo",
+      "./README.md"
+    )
+  }
+
 }

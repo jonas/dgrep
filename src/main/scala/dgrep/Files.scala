@@ -4,6 +4,9 @@ import java.io.File
 
 object Files {
 
+  def listAllDescendantFiles(root: File): Stream[File] =
+    listDescendantDirectories(root) flatMap listDirectoryFiles
+
   def listDescendantDirectories(root: File): Stream[File] =
     if (!root.exists)
       Stream.empty
