@@ -8,7 +8,24 @@ Written in Scala.
 ```
 since it is broken down into the words: `Written`, `in`, `Scala.`
 
+DGrep assumes that all files are UTF-8 encoded.
+
 ## Getting started
+
+To build the program:
+
+    $ sbt assembly
+
+This will produce a fat-jar in `target/scala-2.11/dgrep.jar`.
+
+To run the program from the root of the DGrep project:
+
+    $ java -jar target/scala-2.11/dgrep.jar Scala src/test/resources/wikipedia/prog/lang
+    src/test/resources/wikipedia/prog/lang/scala.da.txt
+    src/test/resources/wikipedia/prog/lang/scala.fr.txt
+    src/test/resources/wikipedia/prog/lang/scala.txt
+
+This also shows an example output of the program.
 
 To run the tests:
 
