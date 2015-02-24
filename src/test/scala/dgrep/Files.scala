@@ -1,7 +1,12 @@
 package dgrep
 
+import scala.language.postfixOps
 import org.scalatest._
+
 import java.io.File
+import java.io.FileNotFoundException
+
+import dgrep.Strings._
 
 class FilesSpec extends FlatSpec with Matchers {
 
@@ -13,9 +18,11 @@ class FilesSpec extends FlatSpec with Matchers {
     val path = root + "/" + name
     val dir = new File(path)
     def stripPath(file: File): String = file.getPath.replace(path, ".")
+    def /(name: String): File = new File(dir, name)
   }
 
   val wikipedia = TestData("wikipedia")
+  val wikipediaProg = TestData("wikipedia/prog")
   val wikipediaProgLang = TestData("wikipedia/prog/lang")
   val effectiveScala = TestData("effective-scala")
   val nonExistent = TestData("non-existent-directory")
@@ -116,6 +123,7 @@ class FilesSpec extends FlatSpec with Matchers {
       "./canada/montreal.txt",
       "./canada/quebec.da.txt",
       "./canada/quebec.fr.txt",
+      "./corrupted/non-utf8-encoded-file.bin",
       "./prog/computer-science.da.txt",
       "./prog/computer-science.txt",
       "./prog/functional.da.txt",
@@ -136,6 +144,43 @@ class FilesSpec extends FlatSpec with Matchers {
       "./effectivescala.mo",
       "./README.md"
     )
+  }
+
+  "readFileLines" should "iterate over all content in a file" in {
+    val content = readFileLines(wikipediaProg / "computer-science.da.txt") mkString("", "\n", "\n")
+    val shaBytes = java.security.MessageDigest.getInstance("SHA") digest content.getBytes("UTF-8")
+    val shaString = shaBytes map ("%02x" format _) mkString
+
+    shaString should be ("02f24edf13271c31fde5f7bd4cd9e1a2bd51349b")
+  }
+
+  it should "be composable with stringContainsWord" in {
+    def fileContains(file: File, word: String): Boolean =
+      readFileLines(file) exists stringContainsWord(word)
+
+    fileContains(wikipediaProgLang / "scala.txt", "Scala") should be (true)
+    fileContains(wikipediaProgLang / "scala.da.txt", "programmering") should be (true)
+    fileContains(wikipediaProgLang / "scala.da.txt", "målestoksforhold.") should be (true)
+
+    fileContains(effectiveScala / "effectivescala.mo", "Twitter") should be (true)
+    fileContains(effectiveScala / "effectivescala-ja.mo", "の") should be (true)
+
+    fileContains(wikipediaProgLang / "scala.txt", "målestoksforhold") should be (false)
+  }
+
+  it should "report file not found for non existent files" in {
+    an [FileNotFoundException] should be thrownBy readFileLines(nonExistent / "non-existent-file")
+    an [FileNotFoundException] should be thrownBy readFileLines(emptyDirectory / "non-existent-file")
+  }
+
+  it should "report file not found when given a directory" in {
+    an [FileNotFoundException] should be thrownBy readFileLines(emptyDirectory.dir)
+  }
+
+  it should "report encoding error when reading file that is not UTF-8 encoded" in {
+    an [java.nio.charset.MalformedInputException] should be thrownBy {
+      readFileLines(wikipedia / "corrupted/non-utf8-encoded-file.bin") contains "word"
+    }
   }
 
 }

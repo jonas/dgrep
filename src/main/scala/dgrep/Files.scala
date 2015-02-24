@@ -1,8 +1,13 @@
 package dgrep
 
 import java.io.File
+import scala.io.Source
+import dgrep.Strings._
 
 object Files {
+
+  def readFileLines(file: File): Stream[String] =
+    Source.fromFile(file).getLines.toStream
 
   def listAllDescendantFiles(root: File): Stream[File] =
     listDescendantDirectories(root) flatMap listDirectoryFiles
