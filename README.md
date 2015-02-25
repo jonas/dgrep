@@ -31,6 +31,16 @@ To run the tests:
 
     $ sbt test
 
+To launch a virtual machine with Ubuntu 14.04 (requires that Vagrant and
+VirtualBox are installed on the host machine) and install all software
+required for running and testing DGrep:
+
+    host> vagrant up
+    # Then ssh into the vm
+    host> vagrant ssh
+    # Once inside the vm shell execute the install script
+    vm> sudo /vagrant/install-deps.sh
+
 ## Options
 
 The program supports the following options:
