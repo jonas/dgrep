@@ -23,14 +23,17 @@ object DGrep {
   /* Holds the visited file and matched lines or error info. */
   type FileInfo = (File, Try[Stream[LineInfo]])
 
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]): Unit =
+    run(args)(Env())
+
+  def run(args: Array[String])(implicit env: Env): Unit = {
     val (word, root) = parseArgs(args)
 
     def toFileInfo(file: File): FileInfo =
       (file, Try { lineInfoForWord(file) filter linesContaining(word) })
 
     listAllDescendantFiles(root) map toFileInfo foreach {
-      case (file, Success(lineInfo)) if lineInfo nonEmpty => println(file)
+      case (file, Success(lineInfo)) if lineInfo nonEmpty => env.stdout(file)
       case _ =>
     }
   }
@@ -42,7 +45,7 @@ object DGrep {
   def linesContaining(word: String)(lineInfo: LineInfo): Boolean =
     stringContainsWord(word)(lineInfo._2)
 
-  def parseArgs(args: Array[String]): (String, File) = {
+  def parseArgs(args: Array[String])(implicit env: Env): (String, File) = {
     if (args.length != 2)
       usage()
 
@@ -54,9 +57,9 @@ object DGrep {
     (word, root)
   }
 
-  def usage(msgs: String*): Unit = {
-    msgs foreach System.err.println
-    System.err.println(USAGE)
-    System.exit(1)
+  def usage(msgs: String*)(implicit env: Env): Unit = {
+    msgs foreach env.stderr
+    env.stderr(USAGE)
+    env.exit(1)
   }
 }
