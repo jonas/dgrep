@@ -36,6 +36,7 @@ To run the tests:
 The program supports the following options:
 
  * `-s` Suppress error messages printed to stderr.
+ * `-L` Print only files not containing the search word.
 
 ## Licensing
 

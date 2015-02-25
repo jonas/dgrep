@@ -9,7 +9,7 @@ import dgrep.Strings._
 
 object DGrep {
 
-  val USAGE = "Usage: dgrep [-s] <word> <directory>"
+  val USAGE = "Usage: dgrep [-s|-L] <word> <directory>"
 
   /* Models the basic environment that the program uses for communicating
    * its result. Allows tests to more easily capture the behavior. */
@@ -33,6 +33,10 @@ object DGrep {
     val printers = ArrayBuffer(Printers.printFileNameWithMatches)
     if (!(flags contains "-s"))
       printers += Printers.printError
+    if (flags contains "-L") {
+      printers -= Printers.printFileNameWithMatches
+      printers += Printers.printFileNameWithoutMatches
+    }
 
     def toFileInfo(file: File): FileInfo =
       (file, Try { lineInfoForWord(file) filter linesContaining(word) })
@@ -47,6 +51,11 @@ object DGrep {
 
     val printFileNameWithMatches: Env => Printer = env => {
       case (file, Success(lineInfo)) if lineInfo nonEmpty =>
+        env.stdout(file)
+    }
+
+    val printFileNameWithoutMatches: Env => Printer = env => {
+      case (file, Success(lineInfo)) if lineInfo isEmpty =>
         env.stdout(file)
     }
 

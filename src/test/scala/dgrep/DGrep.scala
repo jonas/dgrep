@@ -104,4 +104,14 @@ class DGrepSpec extends FlatSpec with Matchers {
     context.stderr should be ("")
   }
 
+  it should "print files not containing searched word when '-L' option is given" in {
+    val context = Context()
+    val args = Array("-L", "Odersky", "src/test/resources/wikipedia/prog/lang")
+
+    DGrep.run(args)(context.env)
+
+    context.exitCode should be (0)
+    context.stdout should be ("src/test/resources/wikipedia/prog/lang/haskell.txt\n")
+    context.stderr should be ("")
+  }
 }
