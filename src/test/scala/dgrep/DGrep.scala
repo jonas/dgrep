@@ -114,4 +114,19 @@ class DGrepSpec extends FlatSpec with Matchers {
     context.stdout should be ("src/test/resources/wikipedia/prog/lang/haskell.txt\n")
     context.stderr should be ("")
   }
+
+  it should "print all matched lines when '-n' is given" in {
+    val context = Context()
+    val args = Array("-n", "IDE", "src/test/resources/wikipedia/prog/lang")
+
+    DGrep.run(args)(context.env)
+
+    context.exitCode should be (0)
+    context.stdout should be (
+      """src/test/resources/wikipedia/prog/lang/haskell.txt:338:Leksah, a GTK-based Haskell IDE written in Haskell
+        |src/test/resources/wikipedia/prog/lang/haskell.txt:339:FP Haskell Center, web-based Haskell IDE designed by FP Complete.
+        |src/test/resources/wikipedia/prog/lang/scala.txt:755:Jump up ^ Scala IDE for Eclipse: Developing for Android
+        |""".stripMargin)
+    context.stderr should be ("")
+  }
 }

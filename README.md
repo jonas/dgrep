@@ -37,6 +37,7 @@ The program supports the following options:
 
  * `-s` Suppress error messages printed to stderr.
  * `-L` Print only files not containing the search word.
+ * `-n` List the line number and content of all matching lines.
 
 ## Licensing
 
