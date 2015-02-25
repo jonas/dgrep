@@ -66,7 +66,7 @@ class DGrepSpec extends FlatSpec with Matchers {
                                 |src/test/resources/wikipedia/prog/lang/scala.fr.txt
                                 |src/test/resources/wikipedia/prog/lang/scala.txt
                                 |""".stripMargin)
-    context.stderr should be ("")
+    context.stderr should be ("ERROR:src/test/resources/wikipedia/corrupted/non-utf8-encoded-file.bin:java.nio.charset.MalformedInputException: Input length = 1\n")
   }
 
   it should "find files containing the searched word in flat directory structure" in {
@@ -91,6 +91,16 @@ class DGrepSpec extends FlatSpec with Matchers {
 
     context.exitCode should be (0)
     context.stdout should be ("")
+    context.stderr should be ("")
+  }
+
+  it should "suppress errors when '-s' option is given" in {
+    val context = Context()
+    val args = Array("-s", "Odersky", "src/test/resources/wikipedia")
+
+    DGrep.run(args)(context.env)
+
+    context.exitCode should be (0)
     context.stderr should be ("")
   }
 

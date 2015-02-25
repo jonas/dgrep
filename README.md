@@ -31,6 +31,12 @@ To run the tests:
 
     $ sbt test
 
+## Options
+
+The program supports the following options:
+
+ * `-s` Suppress error messages printed to stderr.
+
 ## Licensing
 
 This program is licensed under the Apache License, version 2. See [the
